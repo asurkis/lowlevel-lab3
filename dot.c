@@ -13,10 +13,13 @@ int vector_dot(int *va, int *vb, size_t n)
   return sum;
 }
 
-void read_vector(FILE *f, int *v, size_t n) {
+int read_vector(FILE *f, int *v, size_t n)
+{
   size_t i;
   for (i = 0; i < n; ++i)
-    fscanf(f, "%d", &v[i]);
+    if (!fscanf(f, "%d", &v[i]))
+      return 0;
+  return 1;
 }
 
 size_t read_input(int *va, int *vb)
@@ -25,8 +28,10 @@ size_t read_input(int *va, int *vb)
   size_t n;
   scanf("%d", &n_input);
   n = n_input;
-  read_vector(stdin, va, n);
-  read_vector(stdin, vb, n);
+  if (!read_vector(stdin, va, n))
+    return 0;
+  if (!read_vector(stdin, vb, n))
+    return 0;
   return n;
 }
 

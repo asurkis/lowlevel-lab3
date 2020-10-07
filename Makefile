@@ -1,13 +1,13 @@
 CC = gcc
 CFLAGS = -std=c89 -pedantic-errors -Wall -Werror
 
-default: build
+default: dot
 
 clean:
-	rm -f *.o main
+	rm -f *.o dot is_prime
 
-build: main.c
-	$(CC) $(CFLAGS) main.c -o main
+dot: dot.c
+	$(CC) $(CFLAGS) dot.c -o dot
 
-run: build
-	./main <input.txt >output.txt
+prime: prime.c
+	$(CC) $(CFLAGS) prime.c -o prime
